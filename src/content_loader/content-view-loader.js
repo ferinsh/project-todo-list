@@ -13,6 +13,7 @@ function createTodoHolder(todoObject) {
     todoHolder.appendChild(dueDate);
     todoHolder.appendChild(desc);
     todoHolder.appendChild(priority);
+    todoHolder.id = todoObject.title;
 
     title.id = 'todoHolder-title';
     dueDate.id = 'todoHolder-dueDate';
@@ -23,6 +24,8 @@ function createTodoHolder(todoObject) {
     dueDate.innerHTML = todoObject.dueDate;
     desc.innerHTML = todoObject.desc;
     priority.innerHTML = todoObject.priority;
+
+    console.log(todoObject);
     return todoHolder;
 }
 

@@ -35,6 +35,36 @@ body{
     
 }
 
+.header-buttons-holder {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-title {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-button {
+    height: 50%;
+    width: 25%;
+    color: white;
+    border: 1px solid white;
+    background: black;
+}
+
+.header-button:hover {
+    background-color: darkslategray;
+    
+    color: white;
+}
+
 .content {
     height: 85%;
     width: 100%;
