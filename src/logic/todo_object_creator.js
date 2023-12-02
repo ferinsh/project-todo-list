@@ -1,12 +1,13 @@
-export default function createTodoObject(title, dueDate, desc) {
+export default function createTodoObject(title, dueDate, desc, priority) {
 
     class TodoObject {
-        constructor (_title, _dueDate, _desc) {
+        constructor (_title, _dueDate, _desc, _priority) {
             this.title = _title;
             this.dueDate = _dueDate;
             this.desc = _desc;
+            this.priority = _priority;
         }
     }
 
-    return new TodoObject(title, dueDate, desc);
+    return new TodoObject(title, dueDate, desc, priority);
 }
