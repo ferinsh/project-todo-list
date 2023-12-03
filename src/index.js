@@ -4,6 +4,8 @@ import contentViewLoader from './content_loader/content-view-loader';
 import createTodoObject from "./logic/todo_object_creator";
 import createFormInMenu from './create-form-in-menu';
 import contentViewProjectLoader from './content_loader/content-view-project-loader.js';
+import createProjectCardObject from './content_loader/project-files/projectCardObject.js';
+import createProjectForm from './createProjectForm.js';
 
 
 
@@ -20,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let todoObjectArray = [];        
     todoObjectArray.push(new createTodoObject('Run', '25/06/2002', 'Keep running', 1));
     todoObjectArray.push(new createTodoObject('Sleep', '25/06/2002', 'Sleep away', 2));
+
+    var todoProjectTaskArray = [];
+    const todoprojectArray = [];
+    todoprojectArray.push(createProjectCardObject(1, [2,3]));
     
     
     contentViewLoader(todoObjectArray);
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     createFormInMenu();
+    createProjectForm();
 
     /* --BUTTONS-- */
 
@@ -43,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnReset = document.getElementById('btn-reset');
     const btnTodo = document.getElementById('btn-todo');
     const btnProject = document.getElementById('btn-project');
+    const btnProjectAddTask = document.getElementById('addTask-project-form');
+    const btnProjectSubmit = document.getElementById('submit-project-form');
+    const btnProjectCancel = document.getElementById('cancel-project-form');
+
     console.log(btnProject);
     
     
@@ -122,7 +133,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnProject.addEventListener('click', () => {
-        contentViewProjectLoader();
+        contentViewProjectLoader(todoprojectArray); //
     });
+
+    btnProjectAddTask.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        console.log('Hi');
+        const todoTask = document.getElementById('project-form-todolist');
+        console.log(todoTask);
+        todoProjectTaskArray.push(todoTask.value);
+        todoTask.value = "";
+        console.log(todoProjectTaskArray);
+
+    });
+
+    btnProjectSubmit.addEventListener("click", (e) =>{
+        e.preventDefault();
+        console.log("Hello");
+        const title = document.getElementById('project-form-title');
+        console.log(title.value);
+        todoprojectArray.push(createProjectCardObject(title.value, todoProjectTaskArray));
+        console.log(todoprojectArray);
+        contentViewProjectLoader(todoprojectArray);
+        todoProjectTaskArray = []
+        document.querySelector('#project-form').style.display = 'none';
+    })
+
+    btnProjectCancel.addEventListener('click', (e) => {
+        e.preventDefault();
+        const taskForm = document.querySelector('#project-form');
+        taskForm.reset();
+        taskForm.style.display = 'none';
+    })
+
+
     //----------------------------------------------------------------
 });

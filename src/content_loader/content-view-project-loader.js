@@ -1,7 +1,14 @@
 import createProject from "./project-files/createProject";
 import displayProject from "./project-files/displayProject";
+import createProjectCardObject from "./project-files/projectCardObject";
 
-export default function contentViewProjectLoader(){
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+function createProjectContent(projectCount){
     const contentView = document.getElementById('content-view');
     console.log(contentView);
     removeAllChildNodes(contentView);
@@ -16,15 +23,11 @@ export default function contentViewProjectLoader(){
     
     const headerTitle = document.createElement('div');
     headerTitle.classList.add('content-project-header-title');
-    headerTitle.innerText = 'PROJECTS';
-
-    
+    headerTitle.innerText = `PROJECTS: ${projectCount}`;
 
     const projectButtonHolder = document.createElement('div');
     const createProjectBtn = document.createElement('button');
     const deleteProjectBtn = document.createElement('button');
-
-    
     
     createProjectBtn.classList.add('project-buttons');
     deleteProjectBtn.classList.add('project-buttons');
@@ -38,7 +41,7 @@ export default function contentViewProjectLoader(){
 
     const projectHolder = document.createElement('div');
     projectHolder.classList.add('project-item-holder');
-
+    projectHolder.id = 'project-item-holder';
 
     projectButtonHolder.appendChild(createProjectBtn);
     projectButtonHolder.appendChild(deleteProjectBtn);
@@ -47,12 +50,20 @@ export default function contentViewProjectLoader(){
     projectContent.appendChild(projectButtonHolder);
     projectContent.appendChild(projectHolder);
     contentView.appendChild(projectContent);
+}
 
-    displayProject();
+export default function contentViewProjectLoader(projectArray){
+    
+    createProjectContent(projectArray.length);
+    displayProject(projectArray);
+
+    const createProjectBtn = document.getElementById('project-button-create');
+    const deleteProjectBtn = document.getElementById('project-button-delete');
 
     createProjectBtn.addEventListener("click", () => {
         console.log("createProject");
-        createProject();
+        createProject(projectArray);
+        displayProject(projectArray)
     });
     
     deleteProjectBtn.addEventListener("click", () => {
@@ -60,8 +71,3 @@ export default function contentViewProjectLoader(){
     });
 }
 
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
