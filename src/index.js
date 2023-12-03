@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let todoObjectArray = [];        
     todoObjectArray.push(new createTodoObject('Run', '25/06/2002', 'Keep running', 1));
     todoObjectArray.push(new createTodoObject('Sleep', '25/06/2002', 'Sleep away', 2));
+    console.log(todoObjectArray);
 
     var todoProjectTaskArray = [];
     const todoprojectArray = [];
@@ -38,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createFormInMenu();
     createProjectForm();
+    console.log("1234");
+    console.log(todoObjectArray);
 
     /* --BUTTONS-- */
 
@@ -56,12 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(btnProject);
     
-    
+    console.log("1234");
+    console.log(todoObjectArray);
 
     btnTodo.addEventListener('click', () => {
         contentView.classList.remove('content-view-project');
         contentView.classList.add('content-view');
         contentViewLoader(todoObjectArray);
+
     });
 
 
@@ -133,7 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnProject.addEventListener('click', () => {
-        contentViewProjectLoader(todoprojectArray); //
+        contentViewProjectLoader(todoprojectArray);
+        console.log("1234");
+        console.log(todoObjectArray);
     });
 
     btnProjectAddTask.addEventListener('click', (e) => {
@@ -142,9 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Hi');
         const todoTask = document.getElementById('project-form-todolist');
         console.log(todoTask);
-        todoProjectTaskArray.push(todoTask.value);
+        //todoProjectTaskArray.push(todoTask.value);
+        for(var i = 0; i < todoObjectArray.length; i++){
+            if((todoTask.value) == (todoObjectArray[i].title)){
+                todoProjectTaskArray.push(todoObjectArray[i]);
+            }
+        }
+
         todoTask.value = "";
-        console.log(todoProjectTaskArray);
+        
 
     });
 
@@ -158,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contentViewProjectLoader(todoprojectArray);
         todoProjectTaskArray = []
         document.querySelector('#project-form').style.display = 'none';
+        console.log(todoprojectArray);
     })
 
     btnProjectCancel.addEventListener('click', (e) => {
