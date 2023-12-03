@@ -1,4 +1,4 @@
-export default function createTodoObject(title, dueDate, desc, priority) {
+export default function createTodoObject(title, dueDate, description, priority) {
 
     class TodoObject {
         constructor (_title, _dueDate, _desc, _priority) {
@@ -9,5 +9,5 @@ export default function createTodoObject(title, dueDate, desc, priority) {
         }
     }
 
-    return new TodoObject(title, dueDate, desc, priority);
+    return new TodoObject(title, dueDate, description, priority);
 }

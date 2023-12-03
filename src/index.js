@@ -3,20 +3,21 @@ import contentLoader from './content_loader/content-loader';
 import contentViewLoader from './content_loader/content-view-loader';
 import createTodoObject from "./logic/todo_object_creator";
 import createFormInMenu from './create-form-in-menu';
+import contentViewProjectLoader from './content_loader/content-view-project-loader.js';
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content loaded');
     const container = document.querySelector('#container');
-    const contentView = document.querySelector('#content-view');
     
     container.appendChild(contentLoader());
-
+    const contentView = document.querySelector('#content-view');
+    console.log(contentView);
 
 
     //load todo content view
     let todoObjectArray = [];        
-
     todoObjectArray.push(new createTodoObject('Run', '25/06/2002', 'Keep running', 1));
     todoObjectArray.push(new createTodoObject('Sleep', '25/06/2002', 'Sleep away', 2));
     
@@ -35,15 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const taskForm = document.getElementById('add-task-form');
     const btnSubmit = document.getElementById('btnSubmit');
-    const btnCancel = document.getElementById('btnCancel');
-    const btnTodoSelector = document.querySelectorAll('.todo-holder');
+    const btnCancel = document.getElementById('btnCancel'); 
     const btnHeaderCancel = document.getElementById('header-button-cancel');
     const btnHeaderDelete = document.getElementById('header-button-delete');
     const headerBtnHolder = document.getElementById('header-buttons-holder');
-    console.log(headerBtnHolder);
-    console.log(btnHeaderCancel);
+    const btnReset = document.getElementById('btn-reset');
+    const btnTodo = document.getElementById('btn-todo');
+    const btnProject = document.getElementById('btn-project');
+    console.log(btnProject);
+    
     
 
+    btnTodo.addEventListener('click', () => {
+        contentView.classList.remove('content-view-project');
+        contentView.classList.add('content-view');
+        contentViewLoader(todoObjectArray);
+    });
 
 
     btnHeaderCancel.addEventListener('click', () => {
@@ -105,5 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
         taskForm.style.display = 'none';
     });
     
+    btnReset.addEventListener('click', (e) => {
+        for(var i = 0; i <= todoObjectArray.length; i++) {
+            todoObjectArray.pop();
+        }
+        console.log(todoObjectArray);
+        contentViewLoader(todoObjectArray);
+    });
+
+    btnProject.addEventListener('click', () => {
+        contentViewProjectLoader();
+    });
     //----------------------------------------------------------------
 });

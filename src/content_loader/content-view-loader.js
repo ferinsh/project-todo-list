@@ -22,7 +22,7 @@ function createTodoHolder(todoObject) {
 
     title.innerHTML = todoObject.title;
     dueDate.innerHTML = todoObject.dueDate;
-    desc.innerHTML = todoObject.desc;
+    desc.innerHTML = todoObject.description;
     priority.innerHTML = todoObject.priority;
 
     console.log(todoObject);
@@ -46,6 +46,7 @@ export default function contentViewLoader(todoArray) {
     removeAllChildNodes(contentView);
 
     for (var i = 0; i < todoArray.length; i++) {
+        console.log(todoArray[i]);
         contentView.appendChild(createTodoHolder(todoArray[i]));
     }
 
